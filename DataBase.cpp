@@ -7,7 +7,7 @@ int stringToField(const char * str,Field & result,char * buf,char * buf_data)
     int len = 0;
     while(buf[len] != 0 && len < MAX_BUF_LEN)
         len ++;
-    buf[len] = '\0';
+    //buf[len] = '\0';
     result.setItem(buf,len + 1);
     result.setData(buf_data);
     return 1;
@@ -66,6 +66,50 @@ DataBase :: DataBase(FILE *file) throw(DataBase ::DataBaseException)
     delete [] buf;
     delete [] bufItem;
     delete [] bufData;
+}
+void DataBase :: push_back(const Field &copy)
+{
+    data.push_back(copy);
+}
+bool DataBase :: isContentsPrice(double price) const
+{
+    for(int i = 0; i < data.size(); i++)
+    {
+        if(data[i].getPrice() == price)
+            return true;
+    }
+    return false;
+}
+bool DataBase :: isContentsID(int id) const
+{
+    for(int i = 0; i< data.size(); i++)
+    {
+        if(data[i].getUserID() == id)
+            return true;
+    }
+    return false;
+}
+bool DataBase :: isContentsData(const char data1[12]) const
+{
+    for(int i = 0; i< data.size();i++)
+    {
+        if(!strcmp(data[i].getData(),data1))
+            return true;
+    }
+    return false;
+}
+bool DataBase ::isContentsItem(const char *item) const
+{
+    for(int i = 0; i < data.size(); i++)
+    {
+        if(!strcmp(data[i].getItem(),item))
+            return true;
+    }
+    return false;
+}
+void DataBase :: freeVector()
+{
+    data.freeVector();
 }
 void DataBase :: printData()
 {

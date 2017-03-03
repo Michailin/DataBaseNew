@@ -37,7 +37,7 @@ public:
     void deleteField(const Field & copy);
     void deleteField(unsigned int index);
 
-    bool isContentsData(const char data[12]) const;
+    bool isContentsData(const char data1[12]) const;
     bool isContentsID(int id) const;
     bool isContentsItem(const char * item) const;
     bool isContentsPrice(double price) const;
