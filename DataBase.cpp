@@ -164,11 +164,37 @@ void DataBase :: getIntervalItem(const char *itemBegin, const char *itemEnd, Dat
     result.freeVector();
     for(unsigned int i = 0; i < data.size() ; i++)
     {
-        if(strcompare1(data[i].getItem(),itemBegin) >= 0 && strcompare1(itemEnd,data[i].getItem()) >= 0)
+        if((isBeginTheSame(itemBegin,data[i].getItem()) || strcmp(data[i].getItem(),itemBegin) >= 0 )&& (isBeginTheSame(itemEnd,data[i].getItem()) || strcmp(itemEnd,data[i].getItem()) >= 0))
             result.push_back(data[i]);
     }
 }
-void DataBase :: printData()
+void DataBase :: getIntervalFull(int idBegin, int idEnd, const char *itemBegin, const char *itemEnd, double priceBegin, double priceEnd, const char dataBegin[], const char dataEnd[], DataBase &result) const
+{
+    result.freeVector();
+    for(unsigned int i =0; i < data.size(); i++)
+    {
+        bool contents = true;
+        if(idBegin != -1)
+            contents *= (idBegin < data[i].getUserID());
+        if(idEnd != -1)
+            contents *= (idEnd > data[i].getUserID());
+        if(itemBegin)
+            contents *= ((isBeginTheSame(itemBegin,data[i].getItem())) || (strcmp(data[i].getItem(),itemBegin) >= 0));
+        if(itemEnd)
+            contents *= ((isBeginTheSame(itemEnd,data[i].getItem())) || (strcmp(itemEnd,data[i].getItem()) >= 0));
+        if(priceBegin != -1)
+            contents *= (priceBegin <= data[i].getPrice());
+        if(priceEnd != -1)
+            contents *= (priceEnd >= data[i].getPrice());
+        if(dataBegin)
+            contents *= (strcmp(data[i].getData(),dataBegin) >= 0);
+        if(dataEnd)
+            contents *= (strcmp(dataEnd,data[i].getData()) >= 0);
+        if(contents)
+            result.push_back(data[i]);
+    }
+}
+void DataBase :: printData() const
 {
     for(unsigned int  i=0; i< data.size(); i++)
         std :: cout <<data[i].getUserID()<< " " <<data[i].getItem() << " " <<  data[i].getPrice() << " " << data[i].getData() << std :: endl;

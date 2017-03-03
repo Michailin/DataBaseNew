@@ -50,7 +50,9 @@ public:
     void getIntervalItem(const char * itemBegin,const char * itemEnd,DataBase & result) const;
     void getIntervalPrice(double priceBegin, double priceEnd, DataBase & result) const;
 
-    void printData(); // debug function
+    void getIntervalFull(int idBegin,int idEnd, const char * itemBegin, const char * itemEnd,double priceBegin,double priceEnd,const char dataBegin[], const char dataEnd[],DataBase & result) const;
+
+    void printData() const; // debug function
 };
 int stringToField(const char * str, Field & result,char * buf,char * buf_data);
 #endif

@@ -1,19 +1,17 @@
 #include "strcompare.h"
-int strcompare1(const char * s1, const char * s2)
+bool isBeginTheSame(const char * begin,const char * word)
 {
-    unsigned int len1 = strlen(s1);
-    unsigned int len2 = strlen(s2);
-    if(len1 >= len2 )
-        return strcmp(s1,s2);
+    unsigned int len_begin = strlen(begin);
+    unsigned int len_word = strlen(word);
+    if(len_begin > len_word)
+        return false;
     else
     {
-        for(unsigned int i = 0; i < len1; i++)
+        for(unsigned int i = 0; i < len_begin; i++)
         {
-            if(s1[i] > s2[i])
-                return 1;
-            else if(s1[i] < s2[i])
-                return -1;
+            if(begin[i] != word[i])
+                return false;
         }
-        return 1;
+        return true;
     }
 }

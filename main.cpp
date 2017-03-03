@@ -3,45 +3,22 @@
 #include <algorithm>
 #include <cstdio>
 #include "structs.h"
-#include "DataBase.h"\
-//#include <cstring>
- void func()
-{
-    Field ls;
-    ls.setData("2017.01.12");
-    ls.setItem("123456789",9);
-    Vector <Field> tmp;
-    std :: string tpq;
-    for(int i = 0; i < 10; i++)
-    {
-        std :: cin >> tpq;
-        ls.setItem(tpq.c_str(),tpq.size());
-    }
-}
-
+#include "DataBase.h"
 int main()
 {
-    /*std :: string tmp("25073450 taohy 189.923077 2013.11.12");
-    Field t;
-    char * buf = new char [1024];
-    char * buf1 = new char [1024];
-    memset(buf,0,1024);
-    memset(buf1,0,1024);
-    stringToField(tmp.c_str(),t,buf,buf1);
-    std :: cout << t.getUserID() << "userId" << std :: endl;
-    std :: cout << t.getItem() << "item" << std :: endl;
-    std :: cout << t.getPrice() << "price" << std :: endl;
-    std :: cout << t.getData() << "data" << std :: endl;
-    */
-    DataBase interval;
-    DataBase tpq("/home/dmitry/Projects/DataBaseNew/output");
-    //tpq.getIntervalID(,41,interval);
-    //tpq.getIntervalData("2004.12.01","2009.11.12",interval);
-    tpq.getIntervalItem("a" , "a",interval);
-    std :: cout << tpq.size() << std :: endl;
-    std :: cout << interval.size() << std :: endl;
-    interval.printData();
-    //std :: cout << tpq.isContentsData("1996.09.02") << std :: endl;
-    //tpq.printData();
+    try
+    {
+        DataBase interval;
+        DataBase dataBase("/home/dmitry/Projects/DataBaseNew/output1");
+        dataBase.getIntervalFull(-1,-1,"a","a",-1,-1,NULL,NULL,interval);
+        std :: cout << dataBase.size() << std :: endl;
+        std :: cout << interval.size() << std :: endl;
+        interval.printData();
+    }
+    catch (DataBase :: DataBaseException e)
+    {
+        printf("%s",e.toString());
+    }
+
     return 0;
 }
