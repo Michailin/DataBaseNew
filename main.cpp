@@ -9,7 +9,7 @@ int main()
     try
     {
         DataBase interval;
-        DataBase dataBase("/home/dmitry/Projects/DataBaseNew/output1");
+        DataBase dataBase("/home/dmitry/Projects/DataBaseNew/output");
         dataBase.getIntervalFull(-1,-1,"a","a",-1,-1,NULL,NULL,interval);
         std :: cout << dataBase.size() << std :: endl;
         std :: cout << interval.size() << std :: endl;

@@ -179,9 +179,9 @@ void DataBase :: getIntervalFull(int idBegin, int idEnd, const char *itemBegin, 
         if(idEnd != -1)
             contents *= (idEnd > data[i].getUserID());
         if(itemBegin)
-            contents *= ((isBeginTheSame(itemBegin,data[i].getItem())) || (strcmp(data[i].getItem(),itemBegin) >= 0));
+            contents *= itemCompareLess(itemBegin,data[i].getItem());
         if(itemEnd)
-            contents *= ((isBeginTheSame(itemEnd,data[i].getItem())) || (strcmp(itemEnd,data[i].getItem()) >= 0));
+            contents *= itemCompareMore(itemEnd,data[i].getItem());
         if(priceBegin != -1)
             contents *= (priceBegin <= data[i].getPrice());
         if(priceEnd != -1)
