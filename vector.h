@@ -206,12 +206,14 @@ public:
     }
     Vector & operator =(const Vector & copy)
     {
-        len = copy.len;            
+        len = copy.len;
         capacity = copy.capacity;
         delete [] data;
         data = new Type[capacity];
         memset(data,0,capacity*sizeof(Type));
-        memcpy(data,copy.data,len*sizeof(Type));
+        for(int i = 0; i < len; i++)
+            data[i] = copy.data[i];
+        //memcpy(data,copy.data,len*sizeof(Type));
         return *this;
     }
     const Type & operator [] (unsigned int index) const throw (VectorException)

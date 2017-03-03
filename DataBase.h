@@ -4,6 +4,7 @@
 #include <cstring>
 #include "structs.h"
 #include <cstdio>
+#include "strcompare.h"
 #define MAX_BUF_LEN 1024
 class DataBase
 {
@@ -26,11 +27,13 @@ public:
         }
     };
 public:
-    //DataBase();
+    DataBase();
     DataBase(const char * path) throw(DataBaseException);
     DataBase(FILE * file) throw(DataBaseException);
     DataBase(const DataBase & copy);
     //~DataBase();
+
+    unsigned int size() const;
 
     void push_back(const Field & copy);
     void freeVector();

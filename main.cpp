@@ -4,7 +4,7 @@
 #include <cstdio>
 #include "structs.h"
 #include "DataBase.h"\
-#include <cstring>
+//#include <cstring>
  void func()
 {
     Field ls;
@@ -33,7 +33,15 @@ int main()
     std :: cout << t.getPrice() << "price" << std :: endl;
     std :: cout << t.getData() << "data" << std :: endl;
     */
-    DataBase tpq("/home/dmitry/Projects/DataBase/output");
-    tpq.printData();
+    DataBase interval;
+    DataBase tpq("/home/dmitry/Projects/DataBaseNew/output");
+    //tpq.getIntervalID(,41,interval);
+    //tpq.getIntervalData("2004.12.01","2009.11.12",interval);
+    tpq.getIntervalItem("a" , "a",interval);
+    std :: cout << tpq.size() << std :: endl;
+    std :: cout << interval.size() << std :: endl;
+    interval.printData();
+    //std :: cout << tpq.isContentsData("1996.09.02") << std :: endl;
+    //tpq.printData();
     return 0;
 }

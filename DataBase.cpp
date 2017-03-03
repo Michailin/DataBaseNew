@@ -1,5 +1,13 @@
 #include "DataBase.h"
 #include <cstdio>
+DataBase ::DataBase()
+{
+
+}
+unsigned int DataBase :: size() const
+{
+    return data.size();
+}
 int stringToField(const char * str,Field & result,char * buf,char * buf_data)
 {
     if(sscanf(str,"%i %s %lf %s",&(result.getUserID()),buf,&(result.getPrice()),buf_data) != 4)
@@ -110,6 +118,55 @@ bool DataBase ::isContentsItem(const char *item) const
 void DataBase :: freeVector()
 {
     data.freeVector();
+}
+void DataBase :: deleteField(const Field &copy)
+{
+    for(unsigned int i = 0; i < data.size();i++)
+    {
+        if(data[i] == copy)
+            data.removeData(i);
+    }
+}
+void DataBase :: deleteField(unsigned int index)
+{
+    if(index < data.size())
+        data.removeData(index);
+}
+void DataBase :: getIntervalData(const char dataBegin[], const char dataEnd[], DataBase &result) const
+{
+    result.freeVector();
+    for(unsigned int i = 0; i < data.size(); i++)
+    {
+        if((strcmp(dataBegin,data[i].getData()) <= 0) && (strcmp(dataEnd,data[i].getData()) >= 0))
+            result.push_back(data[i]);
+    }
+}
+void DataBase :: getIntervalPrice(double priceBegin, double priceEnd, DataBase &result) const
+{
+    result.freeVector();
+    for(unsigned int i = 0; i <data.size(); i++)
+    {
+        if(priceBegin >= data[i].getPrice() && data[i].getPrice() <= priceEnd)
+            result.push_back(data[i]);
+    }
+}
+void DataBase :: getIntervalID(int idBegin, int idEnd, DataBase &result) const
+{
+    result.freeVector();
+    for(unsigned int i =0; i< data.size(); i++)
+    {
+        if(idBegin <= data[i].getUserID() && idEnd >= data[i].getUserID())
+            result.push_back(data[i]);
+    }
+}
+void DataBase :: getIntervalItem(const char *itemBegin, const char *itemEnd, DataBase &result) const
+{
+    result.freeVector();
+    for(unsigned int i = 0; i < data.size() ; i++)
+    {
+        if(strcompare1(data[i].getItem(),itemBegin) >= 0 && strcompare1(itemEnd,data[i].getItem()) >= 0)
+            result.push_back(data[i]);
+    }
 }
 void DataBase :: printData()
 {
